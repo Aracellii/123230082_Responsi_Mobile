@@ -67,7 +67,7 @@ class _DetailPageState extends State<DetailPage> {
     if (genres is List) {
       return genres.map((g) => g.toString()).toList();
     }
-    final category = show['strCategory'];
+    final category = show['genre'];
     if (category is String && category.isNotEmpty) {
       return [category];
     }

@@ -70,7 +70,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       },
                     ),
                     onTap: () {
-                      // DetailPage(context);
+                    Navigator.of(context).pushNamed('/detail', arguments: show);
                     },
                   ),
                 );
