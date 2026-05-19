@@ -5,6 +5,7 @@ class ApiService {
   // static const String showsUrl ='https://www.themealdb.com/api/json/v1/1/search.php?s=';
   // static const String showsUrl = 'https://api.tvmaze.com/shows';
   static const String showsUrl = 'https://www.freetogame.com/api/games';
+  
   Future<dynamic> _fetchJson(String url) async {
     final response = await http.get(Uri.parse(url));
 

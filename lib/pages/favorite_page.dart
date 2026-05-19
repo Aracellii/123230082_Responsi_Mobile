@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:latres/pages/detail_page.dart';
 
 import '../services/auth_service.dart';
 import '../storage/hive_service.dart';
@@ -9,6 +11,7 @@ class FavoritePage extends StatefulWidget {
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();
+  
 }
 
 class _FavoritePageState extends State<FavoritePage> {
@@ -55,7 +58,8 @@ class _FavoritePageState extends State<FavoritePage> {
                                 const Icon(Icons.broken_image),
                           ),
                     title: Text(show['name'].toString()),
-                    subtitle: Text('Rating: ${show['rating']}'),
+                    subtitle: Text('Genre: ${show['genres']}'),
+
                     trailing: IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () async {
@@ -66,9 +70,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       },
                     ),
                     onTap: () {
-                      Navigator.of(
-                        context,
-                      ).pushNamed('/detail', arguments: show);
+                      // DetailPage(context);
                     },
                   ),
                 );

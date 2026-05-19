@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
@@ -80,7 +81,6 @@ class _DetailPageState extends State<DetailPage> {
         '';
     return summary;
   }
-
   Future<void> _toggleFavorite(Map<String, dynamic> show) async {
     if (_username == null || _username!.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -109,15 +109,7 @@ class _DetailPageState extends State<DetailPage> {
     if (!mounted) return;
 
     setState(() {});
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          HiveService.isFavoriteFor(_username!, showId)
-              ? 'Get'
-              : 'In Library',
-        ),
-      ),
-    );
+   
   }
 
   @override
@@ -208,6 +200,11 @@ class _DetailPageState extends State<DetailPage> {
                     .map((genre) => Chip(label: Text(genre)))
                     .toList(),
               ),
+              const SizedBox(height: 16,),
+              Text('Summary', 
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),),
               const SizedBox(height: 16),
               Text(
                 _extractSummary(show),
@@ -218,8 +215,8 @@ class _DetailPageState extends State<DetailPage> {
                 onPressed: _username == null
                     ? null
                     : () => _toggleFavorite(show),
-                icon: Icon(isFavorite ? Icons.add : Icons.check),
-                label: Text(isFavorite ? 'Get' : 'In Library'),
+                icon: Icon(isFavorite ? Icons.check : Icons.add),
+                label: Text(isFavorite ? 'In Library' : 'Get'),
               ),
             ],
           );

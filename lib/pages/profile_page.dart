@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latres/storage/hive_service.dart';
 import '../services/auth_service.dart';
 import 'login_page.dart';
 
@@ -12,6 +13,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String _username = 'Guest User';
   String _email = 'guest@example.com';
+  
   bool _loggedIn = false;
   bool _redirecting = false;
 
@@ -20,11 +22,11 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     _loadState();
   }
-
+  
   Future<void> _loadState() async {
     final logged = await AuthService.isLoggedIn();
     final username = await AuthService.getUsername();
-
+    
     setState(() {
       _loggedIn = logged;
       if (logged && username != null && username.isNotEmpty) {
@@ -36,7 +38,6 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     });
 
-    // if not logged in, redirect to LoginPage so user cannot access profile
     if (!mounted) return;
     if (!logged && !_redirecting) {
       _redirecting = true;
@@ -87,6 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
@@ -106,32 +108,21 @@ class _ProfilePageState extends State<ProfilePage> {
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
+         const SizedBox(height: 16),
+        Text(
+          _username,
+          textAlign: TextAlign.center,
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 4),
         Text(
           _email,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        // const SizedBox(height: 24),
-        // Card(
-        //   child: ListTile(
-        //     leading: const Icon(Icons.favorite),
-        //     title: const Text('Favorite Shows'),
-        //     subtitle: const Text(
-        //       'Lihat daftar show favorit kamu di tab Favorite',
-        //     ),
-        //   ),
-        // ),
-        // const SizedBox(height: 12),
-        // Card(
-        //   child: ListTile(
-        //     leading: const Icon(Icons.info_outline),
-        //     title: const Text('About App'),
-        //     subtitle: const Text('TV Show App - Flutter Project'),
-        //   ),
-        // ),
 
-        
         const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
