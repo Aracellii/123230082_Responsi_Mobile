@@ -115,6 +115,8 @@ class ApiService {
           'summary': data['short_description'] ?? '',
           'date':data['release_date']??'',
           'platform':data['platform']??'',
+          'publisher' :data['publisher']??'',
+          'developer':data['developer']??'',
       };
     }).toList();
   }

@@ -48,11 +48,19 @@ class _DetailPageState extends State<DetailPage> {
     return null;
   }
 
- String _extractRating(Map<String, dynamic> show) {
+  String _extractRating(Map<String, dynamic> show) {
     final rating = show['rating'];
     return rating;
   }
 
+  String _extractPublisher(Map<String, dynamic> show) {
+    final publisher = show['publisher'];
+    return publisher;
+  }
+  String _extractDeveloper(Map<String, dynamic> show) {
+    final developer = show['developer'];
+    return developer;
+  }
   List<String> _extractGenres(Map<String, dynamic> show) {
     final genres = show['genres'];
     if (genres is List) {
@@ -89,6 +97,7 @@ class _DetailPageState extends State<DetailPage> {
       'rating': _extractRating(show),
       'genres': _extractGenres(show),
       'summary': _extractSummary(show),
+      'publisher': _extractPublisher(show),
     };
 
     if (HiveService.isFavoriteFor(_username!, showId)) {
@@ -104,8 +113,8 @@ class _DetailPageState extends State<DetailPage> {
       SnackBar(
         content: Text(
           HiveService.isFavoriteFor(_username!, showId)
-              ? 'Ditambahkan ke favorite'
-              : 'Dihapus dari favorite',
+              ? 'Get'
+              : 'In Library',
         ),
       ),
     );
@@ -132,6 +141,8 @@ class _DetailPageState extends State<DetailPage> {
           final imageUrl = _extractImageUrl(show);
           final rating = _extractRating(show).toString();
           final genres = _extractGenres(show);
+          final developer = _extractDeveloper(show);
+          final publisher = _extractPublisher(show);
           final mealId = int.tryParse(show['id']?.toString() ?? '0') ?? 0;
           final isFavorite = _username == null
               ? false
@@ -167,11 +178,26 @@ class _DetailPageState extends State<DetailPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+               const SizedBox(height: 8),
+              Row(
+                children: [
+                  const SizedBox(width: 4),
+                  Text('Release Date'),
+                  Text("     "),
+                  Text('publisher   '),
+                  Text("     "),
+                  Text('developer   '),
+                ],
+              ),
               const SizedBox(height: 8),
               Row(
                 children: [
                   const SizedBox(width: 4),
                   Text(rating),
+                  Text("     "),
+                  Text(publisher),
+                  Text("     "),
+                  Text(developer),
                 ],
               ),
               const SizedBox(height: 12),
@@ -192,8 +218,8 @@ class _DetailPageState extends State<DetailPage> {
                 onPressed: _username == null
                     ? null
                     : () => _toggleFavorite(show),
-                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-                label: Text(isFavorite ? 'Hapus Favorite' : 'Tambah Favorite'),
+                icon: Icon(isFavorite ? Icons.add : Icons.check),
+                label: Text(isFavorite ? 'Get' : 'In Library'),
               ),
             ],
           );

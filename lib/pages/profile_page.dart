@@ -112,24 +112,26 @@ class _ProfilePageState extends State<ProfilePage> {
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        const SizedBox(height: 24),
-        Card(
-          child: ListTile(
-            leading: const Icon(Icons.favorite),
-            title: const Text('Favorite Shows'),
-            subtitle: const Text(
-              'Lihat daftar show favorit kamu di tab Favorite',
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        Card(
-          child: ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About App'),
-            subtitle: const Text('TV Show App - Flutter Project'),
-          ),
-        ),
+        // const SizedBox(height: 24),
+        // Card(
+        //   child: ListTile(
+        //     leading: const Icon(Icons.favorite),
+        //     title: const Text('Favorite Shows'),
+        //     subtitle: const Text(
+        //       'Lihat daftar show favorit kamu di tab Favorite',
+        //     ),
+        //   ),
+        // ),
+        // const SizedBox(height: 12),
+        // Card(
+        //   child: ListTile(
+        //     leading: const Icon(Icons.info_outline),
+        //     title: const Text('About App'),
+        //     subtitle: const Text('TV Show App - Flutter Project'),
+        //   ),
+        // ),
+
+        
         const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
